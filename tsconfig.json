@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "allowJs": true, // Allow JavaScript files to be compiled
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+    "baseUrl": "src", // Base directory to resolve non-absolute module names
+    "declaration": true, // Generate corresponding .d.ts file
+    "esModuleInterop": true, // Disables namespace imports (import * as fs from "fs") and enables CJS/AMD/UMD style imports (import fs from "fs")
+    "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file.
+    "incremental": true, // Enable incremental compilation by reading/writing information from prior compilations to a file on disk
+    "isolatedModules": true, // Unconditionally emit imports for unresolved files
+    "lib": ["ES2022", "dom"], // List of library files to be included in the compilation
+    "module": "ES2022", // Specify module code generation
+    "moduleResolution": "node", // Resolve modules using Node.js style
+    "noEmit": false, // Do not emit output (meaning do not compile code, only perform type checking)
+    "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statement
+    "noUnusedLocals": true, // Report errors on unused locals
+    "noUnusedParameters": true, // Report errors on unused parameters
+    "resolveJsonModule": true, // Include modules imported with .json extension
+    "outDir": "./dist",
+    "skipLibCheck": true, // Skip type checking of all declaration files
+    "sourceMap": true, // Generate corrresponding .map file
+    "strict": true, // Enable all strict type checking options
+    "target": "ES2022" // Specify ECMAScript target version,
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false, // Use the new message ID format
+    "strictInjectionParameters": true, // Ensure that the parameters for the DI token match the constructor
+    "strictInputAccessModifiers": true, // Ensure that the accessors of the directive inputs match the declared type
+    "strictTemplates": true // Ensure that the templates are type-safe
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
