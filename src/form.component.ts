@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, HostListener, SimpleChanges } from "@angular/core"
+import { Component, Input, HostListener, HostBinding } from "@angular/core"
 
 interface DocusealField {
   name: string,
@@ -11,9 +11,7 @@ interface DocusealField {
 interface AfterViewInit {
   ngAfterViewInit(): void
 }
-interface OnChanges {
-  ngOnChanges(changes: SimpleChanges): void
-}
+
 @Component({
   selector: "docuseal-form",
   standalone: true,
@@ -21,7 +19,7 @@ interface OnChanges {
   styles: []
 })
 
-export class DocusealFormComponent implements AfterViewInit, OnChanges {
+export class DocusealFormComponent implements AfterViewInit {
   @Input() src: string = ""
   @Input() host: string = "cdn.docuseal.co"
   @Input() role: string = ""
@@ -44,7 +42,7 @@ export class DocusealFormComponent implements AfterViewInit, OnChanges {
   @Input() withSendCopyButton: boolean = true
   @Input() allowToResubmit: boolean = true
   @Input() allowTypedSignature: boolean = true
-  @Input() sendCopyEmail: boolean = false
+  @Input() sendCopyEmail: boolean | null = null
   @Input() values: object = {}
   @Input() metadata: object = {}
   @Input() i18n: object = {}
@@ -55,154 +53,36 @@ export class DocusealFormComponent implements AfterViewInit, OnChanges {
   @Input() onLoad: (detail: any) => void = () => {}
   @Input() customCss: string = ""
 
-  constructor(private el: ElementRef) {}
-
-  get attributes (): { [key: string]: any } {
-    return {
-      src: {
-        name: "data-src",
-        value: () => this.src
-      },
-      email: {
-        name: "data-email",
-        value: () => this.email
-      },
-      role: {
-        name: "data-role",
-        value: () => this.role || this.submitter
-      },
-      externalId: {
-        name: "data-external-id",
-        value: () => this.externalId || this.applicationKey
-      },
-      expand: {
-        name: "data-expand",
-        value: () => this.expand
-      },
-      preview: {
-        name: "data-preview",
-        value: () => this.preview
-      },
-      goToLast: {
-        name: "data-go-to-last",
-        value: () => this.goToLast
-      },
-      skipFields: {
-        name: "data-skip-fields",
-        value: () => this.skipFields
-      },
-      sendCopyEmail: {
-        name: "data-send-copy-email",
-        value: () => this.sendCopyEmail
-      },
-      withTitle: {
-        name: "data-with-title",
-        value: () => this.withTitle
-      },
-      logo: {
-        name: "data-logo",
-        value: () => this.logo
-      },
-      language: {
-        name: "data-language",
-        value: () => this.language
-      },
-      withFieldNames: {
-        name: "data-with-field-names",
-        value: () => this.withFieldNames
-      },
-      withDownloadButton: {
-        name: "data-with-download-button",
-        value: () => this.withDownloadButton
-      },
-      allowToResubmit: {
-        name: "data-allow-to-resubmit",
-        value: () => this.allowToResubmit
-      },
-      allowTypedSignature: {
-        name: "data-allow-typed-signature",
-        value: () => this.allowTypedSignature
-      },
-      completedRedirectUrl: {
-        name: "data-completed-redirect-url",
-        value: () => this.completedRedirectUrl
-      },
-      withSendCopyButton: {
-        name: "data-with-send-copy-button",
-        value: () => this.withSendCopyButton
-      },
-      values: {
-        name: "data-values",
-        value: () => JSON.stringify(this.values)
-      },
-      metadata: {
-        name: "data-metadata",
-        value: () => JSON.stringify(this.metadata)
-      },
-      fields: {
-        name: "data-fields",
-        value: () => JSON.stringify(this.fields)
-      },
-      i18n: {
-        name: "data-i18n",
-        value: () => JSON.stringify(this.i18n)
-      },
-      readonlyFields: {
-        name: "data-readonly-fields",
-        value: () => this.readonlyFields.join(',')
-      },
-      completedButton: [
-        {
-          name: "data-completed-button-title",
-          value: () => this.completedButton.title
-        },
-        {
-          name: "data-completed-button-url",
-          value: () => this.completedButton.url
-        }
-      ],
-      backgroundColor: {
-        name: "data-background-color",
-        value: () => this.backgroundColor
-      },
-      customCss: {
-        name: "data-custom-css",
-        value: () => this.customCss
-      }
-    }
-  }
+  @HostBinding("attr.data-src") get dataSrc(): string { return this.src }
+  @HostBinding("attr.data-email") get dataEmail(): string { return this.email }
+  @HostBinding("attr.data-role") get dataRole(): string { return this.role || this.submitter }
+  @HostBinding("attr.data-external-id") get dataExternalId(): string { return this.externalId || this.applicationKey }
+  @HostBinding("attr.data-expand") get dataExpand(): boolean { return this.expand }
+  @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview }
+  @HostBinding("attr.data-go-to-last") get dataGoToLast(): boolean { return this.goToLast }
+  @HostBinding("attr.data-skip-fields") get dataSkipFields(): boolean { return this.skipFields }
+  @HostBinding("attr.data-send-copy-email") get dataSendCopyEmail(): boolean | null { return this.sendCopyEmail }
+  @HostBinding("attr.data-with-title") get dataWithTitle(): boolean { return this.withTitle }
+  @HostBinding("attr.data-logo") get dataLogo(): string { return this.logo }
+  @HostBinding("attr.data-language") get dataLanguage(): string { return this.language }
+  @HostBinding("attr.data-with-field-names") get dataWithFieldNames(): boolean { return this.withFieldNames }
+  @HostBinding("attr.data-with-download-button") get dataWithDownloadButton(): boolean { return this.withDownloadButton }
+  @HostBinding("attr.data-allow-to-resubmit") get dataAllowToResubmit(): boolean { return this.allowToResubmit }
+  @HostBinding("attr.data-allow-typed-signature") get dataAllowTypedSignature(): boolean { return this.allowTypedSignature }
+  @HostBinding("attr.data-completed-redirect-url") get dataCompletedRedirectUrl(): string { return this.completedRedirectUrl }
+  @HostBinding("attr.data-with-send-copy-button") get dataWithSendCopyButton(): boolean { return this.withSendCopyButton }
+  @HostBinding("attr.data-values") get dataValues(): string { return JSON.stringify(this.values) }
+  @HostBinding("attr.data-metadata") get dataMetadata(): string { return JSON.stringify(this.metadata) }
+  @HostBinding("attr.data-fields") get dataFields(): string { return JSON.stringify(this.fields) }
+  @HostBinding("attr.data-i18n") get dataI18n(): string { return JSON.stringify(this.i18n) }
+  @HostBinding("attr.data-readonly-fields") get dataReadonlyFields(): string { return this.readonlyFields.join(',') }
+  @HostBinding("attr.data-completed-button-title") get dataCompletedButtonTitle(): string { return this.completedButton.title }
+  @HostBinding("attr.data-completed-button-url") get dataCompletedButtonUrl(): string { return this.completedButton.url }
+  @HostBinding("attr.data-background-color") get dataBackgroundColor(): string { return this.backgroundColor }
+  @HostBinding("attr.data-custom-css") get dataCustomCss(): string { return this.customCss }
 
   ngAfterViewInit(): void {
-    const form = this.el.nativeElement;
-
-    Object.entries(this.attributes).forEach(([_, attribute]) => {
-      if (Array.isArray(attribute)) {
-        attribute.forEach((attr) => {
-          form.setAttribute(attr.name, attr.value())
-        })
-      } else {
-        form.setAttribute(attribute.name, attribute.value())
-      }
-    })
-
     this.loadScript()
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const form = this.el.nativeElement;
-    const attributes = this.attributes
-
-    Object.entries(changes).forEach(([key, change]) => {
-      const attribute = attributes[key]
-
-      if (Array.isArray(attribute)) {
-        attribute.forEach((attr) => {
-          form.setAttribute(attr.name, attr.value())
-        })
-      } else if (attribute) {
-        form.setAttribute(attribute.name, change.currentValue)
-      }
-    })
   }
 
   @HostListener('completed', ['$event'])

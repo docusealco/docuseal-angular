@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, HostListener, SimpleChanges } from "@angular/core"
+import { Component, Input, HostListener, HostBinding } from "@angular/core"
 
 interface DocusealField {
   name: string,
@@ -10,9 +10,7 @@ interface DocusealField {
 interface AfterViewInit {
   ngAfterViewInit(): void
 }
-interface OnChanges {
-  ngOnChanges(changes: SimpleChanges): void
-}
+
 @Component({
   selector: "docuseal-builder",
   standalone: true,
@@ -20,7 +18,7 @@ interface OnChanges {
   styles: []
 })
 
-export class DocusealBuilderComponent implements AfterViewInit, OnChanges {
+export class DocusealBuilderComponent implements AfterViewInit {
   @Input() token: string = ""
   @Input() host: string = "cdn.docuseal.co"
   @Input() language: string = "en"
@@ -49,138 +47,32 @@ export class DocusealBuilderComponent implements AfterViewInit, OnChanges {
   @Input() saveButtonText: string = ""
   @Input() customCss: string = ""
 
-  constructor(private el: ElementRef) {}
-
-  get attributes (): { [key: string]: any } {
-    return {
-      src: {
-        name: "data-token",
-        value: () => this.token
-      },
-      preview: {
-        name: "data-preview",
-        value: () => this.preview
-      },
-      language: {
-        name: "data-language",
-        value: () => this.language
-      },
-      autosave: {
-        name: "data-autosave",
-        value: () => this.autosave
-      },
-      sendButtonText: {
-        name: "data-send-button-text",
-        value: () => this.sendButtonText
-      },
-      saveButtonText: {
-        name: "data-save-button-text",
-        value: () => this.saveButtonText
-      },
-      roles: {
-        name: "data-roles",
-        value: () => this.roles.join(',')
-      },
-      fieldTypes: {
-        name: "data-field-types",
-        value: () => this.fieldTypes.join(',')
-      },
-      drawFieldType: {
-        name: "data-draw-field-type",
-        value: () => this.drawFieldType
-      },
-      fields: {
-        name: "data-fields",
-        value: () => JSON.stringify(this.fields)
-      },
-      i18n: {
-        name: "data-i18n",
-        value: () => JSON.stringify(this.i18n)
-      },
-      customButton: [
-        {
-          name: "data-custom-button-title",
-          value: () => this.customButton.title
-        },
-        {
-          name: "data-custom-button-url",
-          value: () => this.customButton.url
-        }
-      ],
-      withRecipientsButton: {
-        name: "data-with-recipients-button",
-        value: () => this.withRecipientsButton
-      },
-      withSendButton: {
-        name: "data-with-send-button",
-        value: () => this.withSendButton
-      },
-      withDocumentsList: {
-        name: "data-with-documents-list",
-        value: () => this.withDocumentsList
-      },
-      withFieldsList: {
-        name: "data-with-fields-list",
-        value: () => this.withFieldsList
-      },
-      withTitle: {
-        name: "data-with-title",
-        value: () => this.withTitle
-      },
-      onlyDefinedFields: {
-        name: "data-only-defined-fields",
-        value: () => this.onlyDefinedFields
-      },
-      withUploadButton: {
-        name: "data-with-upload-button",
-        value: () => this.withUploadButton
-      },
-      withSignYourselfButton: {
-        name: "data-with-sign-yourself-button",
-        value: () => this.withSignYourselfButton
-      },
-      backgroundColor: {
-        name: "data-background-color",
-        value: () => this.backgroundColor
-      },
-      customCss: {
-        name: "data-custom-css",
-        value: () => this.customCss
-      }
-    }
-  }
+  @HostBinding("attr.data-token") get dataToken(): string { return this.token }
+  @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview }
+  @HostBinding("attr.data-language") get dataLanguage(): string { return this.language }
+  @HostBinding("attr.data-autosave") get dataAutosave(): boolean { return this.autosave }
+  @HostBinding("attr.data-send-button-text") get dataSendButtonText(): string { return this.sendButtonText }
+  @HostBinding("attr.data-save-button-text") get dataSaveButtonText(): string { return this.saveButtonText }
+  @HostBinding("attr.data-roles") get dataRoles(): string { return this.roles.join(',') }
+  @HostBinding("attr.data-field-types") get dataFieldTypes(): string { return this.fieldTypes.join(',') }
+  @HostBinding("attr.data-draw-field-type") get dataDrawFieldType(): string { return this.drawFieldType }
+  @HostBinding("attr.data-fields") get dataFields(): string { return JSON.stringify(this.fields) }
+  @HostBinding("attr.data-i18n") get dataI18n(): string { return JSON.stringify(this.i18n) }
+  @HostBinding("attr.data-custom-button-title") get dataCustomButtonTitle(): string { return this.customButton.title }
+  @HostBinding("attr.data-custom-button-url") get dataCustomButtonUrl(): string { return this.customButton.url }
+  @HostBinding("attr.data-with-recipients-button") get dataWithRecipientsButton(): boolean { return this.withRecipientsButton }
+  @HostBinding("attr.data-with-send-button") get dataWithSendButton(): boolean { return this.withSendButton }
+  @HostBinding("attr.data-with-documents-list") get dataWithDocumentsList(): boolean { return this.withDocumentsList }
+  @HostBinding("attr.data-with-fields-list") get dataWithFieldsList(): boolean { return this.withFieldsList }
+  @HostBinding("attr.data-with-title") get dataWithTitle(): boolean { return this.withTitle }
+  @HostBinding("attr.data-only-defined-fields") get dataOnlyDefinedFields(): boolean { return this.onlyDefinedFields }
+  @HostBinding("attr.data-with-upload-button") get dataWithUploadButton(): boolean { return this.withUploadButton }
+  @HostBinding("attr.data-with-sign-yourself-button") get dataWithSignYourselfButton(): boolean { return this.withSignYourselfButton }
+  @HostBinding("attr.data-background-color") get dataBackgroundColor(): string { return this.backgroundColor }
+  @HostBinding("attr.data-custom-css") get dataCustomCss(): string { return this.customCss }
 
   ngAfterViewInit(): void {
-    const builder = this.el.nativeElement;
-
-    Object.entries(this.attributes).forEach(([_, attribute]) => {
-      if (Array.isArray(attribute)) {
-        attribute.forEach((attr) => {
-          builder.setAttribute(attr.name, attr.value())
-        })
-      } else if (attribute) {
-        builder.setAttribute(attribute.name, attribute.value())
-      }
-    })
-
     this.loadScript()
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    const builder = this.el.nativeElement;
-    const attributes = this.attributes
-
-    Object.entries(changes).forEach(([key, change]) => {
-      const attribute = attributes[key]
-
-      if (Array.isArray(attribute)) {
-        attribute.forEach((attr) => {
-          builder.setAttribute(attr.name, attr.value())
-        })
-      } else if (attribute) {
-        builder.setAttribute(attribute.name, change.currentValue)
-      }
-    })
   }
 
   @HostListener('send', ['$event'])
