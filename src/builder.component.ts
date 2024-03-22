@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, HostBinding } from "@angular/core"
+import { Component, Input, HostListener, HostBinding, Output, EventEmitter } from "@angular/core"
 
 interface DocusealField {
   name: string,
@@ -39,13 +39,14 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() drawFieldType: string = "text"
   @Input() customButton: { title: string, url: string } = { title: "", url: "" }
   @Input() backgroundColor: string = ""
-  @Input() onLoad: (detail: any) => void = () => {}
-  @Input() onUpload: (detail: any) => void = () => {}
-  @Input() onSend: (detail: any) => void = () => {}
-  @Input() onSave: (detail: any) => void = () => {}
   @Input() sendButtonText: string = ""
   @Input() saveButtonText: string = ""
   @Input() customCss: string = ""
+
+  @Output() onLoad = new EventEmitter<any>();
+  @Output() onUpload = new EventEmitter<any>();
+  @Output() onSend = new EventEmitter<any>();
+  @Output() onSave = new EventEmitter<any>();
 
   @HostBinding("attr.data-token") get dataToken(): string { return this.token }
   @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview }
@@ -78,28 +79,28 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostListener('send', ['$event'])
   onSendEvent(event: CustomEvent): void {
     if (this.onSend) {
-      this.onSend(event.detail)
+      this.onSend.emit(event.detail)
     }
   }
 
   @HostListener('load', ['$event'])
   onLoadEvent(event: CustomEvent): void {
     if (this.onLoad) {
-      this.onLoad(event.detail)
+      this.onLoad.emit(event.detail)
     }
   }
 
   @HostListener('upload', ['$event'])
   onUploadEvent(event: CustomEvent): void {
     if (this.onUpload) {
-      this.onUpload(event.detail)
+      this.onUpload.emit(event.detail)
     }
   }
 
   @HostListener('save', ['$event'])
   onSaveEvent(event: CustomEvent): void {
     if (this.onSave) {
-      this.onSave(event.detail)
+      this.onSave.emit(event.detail)
     }
   }
 

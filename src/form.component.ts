@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, HostBinding } from "@angular/core"
+import { Component, Input, HostListener, HostBinding, Output, EventEmitter } from "@angular/core"
 
 interface DocusealField {
   name: string,
@@ -48,10 +48,12 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() i18n: object = {}
   @Input() fields: DocusealField[] = []
   @Input() readonlyFields: string[] = []
-  @Input() onComplete: (detail: any) => void = () => {}
-  @Input() onInit: (detail: any) => void = () => {}
-  @Input() onLoad: (detail: any) => void = () => {}
   @Input() customCss: string = ""
+
+  @Output() onComplete = new EventEmitter<any>();
+  @Output() onInit = new EventEmitter<any>();
+  @Output() onLoad = new EventEmitter<any>();
+
 
   @HostBinding("attr.data-src") get dataSrc(): string { return this.src }
   @HostBinding("attr.data-email") get dataEmail(): string { return this.email }
@@ -88,21 +90,21 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostListener('completed', ['$event'])
   onCompleteEvent(event: CustomEvent): void {
     if (this.onComplete) {
-      this.onComplete(event.detail)
+      this.onComplete.emit(event.detail)
     }
   }
 
   @HostListener('init', ['$event'])
   onInitEvent(event: CustomEvent): void {
     if (this.onInit) {
-      this.onInit(event.detail)
+      this.onInit.emit(event.detail)
     }
   }
 
   @HostListener('load', ['$event'])
   onLoadEvent(event: CustomEvent): void {
     if (this.onLoad) {
-      this.onLoad(event.detail)
+      this.onLoad.emit(event.detail)
     }
   }
 
