@@ -50,9 +50,9 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() readonlyFields: string[] = []
   @Input() customCss: string = ""
 
-  @Output() onComplete = new EventEmitter<any>();
-  @Output() onInit = new EventEmitter<any>();
-  @Output() onLoad = new EventEmitter<any>();
+  @Output() onComplete = new EventEmitter<any>()
+  @Output() onInit = new EventEmitter<any>()
+  @Output() onLoad = new EventEmitter<any>()
 
 
   @HostBinding("attr.data-src") get dataSrc(): string { return this.src }

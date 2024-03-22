@@ -43,10 +43,10 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() saveButtonText: string = ""
   @Input() customCss: string = ""
 
-  @Output() onLoad = new EventEmitter<any>();
-  @Output() onUpload = new EventEmitter<any>();
-  @Output() onSend = new EventEmitter<any>();
-  @Output() onSave = new EventEmitter<any>();
+  @Output() onLoad = new EventEmitter<any>()
+  @Output() onUpload = new EventEmitter<any>()
+  @Output() onSend = new EventEmitter<any>()
+  @Output() onSave = new EventEmitter<any>()
 
   @HostBinding("attr.data-token") get dataToken(): string { return this.token }
   @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview }

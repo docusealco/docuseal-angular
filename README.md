@@ -21,7 +21,7 @@ For detailed documentation, please click [here](https://www.docuseal.co/docs/emb
 Copy public DocuSeal form URL from [https://docuseal.co](https://docuseal.co) and use it in the `src` component prop:
 
 ```typescript
-import { Component, } from '@angular/core';
+import { Component } from '@angular/core';
 import { DocusealFormComponent } from '@docuseal/angular';
 
 @Component({
