@@ -36,6 +36,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() completedButton: { title: string, url: string } = { title: "", url: "" }
   @Input() goToLast: boolean = true
   @Input() skipFields: boolean = false
+  @Input() autoscrollFields: boolean = true
   @Input() withTitle: boolean = true
   @Input() withFieldNames: boolean = true
   @Input() withDownloadButton: boolean = true
@@ -63,6 +64,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview }
   @HostBinding("attr.data-go-to-last") get dataGoToLast(): boolean { return this.goToLast }
   @HostBinding("attr.data-skip-fields") get dataSkipFields(): boolean { return this.skipFields }
+  @HostBinding("attr.data-autoscroll-fields") get dataAutoscrollFields(): boolean { return this.autoscrollFields }
   @HostBinding("attr.data-send-copy-email") get dataSendCopyEmail(): boolean | null { return this.sendCopyEmail }
   @HostBinding("attr.data-with-title") get dataWithTitle(): boolean { return this.withTitle }
   @HostBinding("attr.data-logo") get dataLogo(): string { return this.logo }
