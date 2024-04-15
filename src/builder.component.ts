@@ -4,6 +4,9 @@ interface DocusealField {
   name: string,
   type?: string,
   role?: string,
+  title?: string,
+  description?: string,
+  required?: boolean,
   default_value?: string,
 }
 
@@ -34,6 +37,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() withUploadButton: boolean = true
   @Input() roles: string[] = []
   @Input() fields: DocusealField[] = []
+  @Input() requiredFields: DocusealField[] = []
   @Input() i18n: object = {}
   @Input() fieldTypes: string[] = []
   @Input() drawFieldType: string = "text"
@@ -47,6 +51,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Output() onUpload = new EventEmitter<any>()
   @Output() onSend = new EventEmitter<any>()
   @Output() onSave = new EventEmitter<any>()
+  @Output() onChange = new EventEmitter<any>()
 
   @HostBinding("attr.data-token") get dataToken(): string { return this.token }
   @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview }
@@ -58,6 +63,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-field-types") get dataFieldTypes(): string { return this.fieldTypes.join(',') }
   @HostBinding("attr.data-draw-field-type") get dataDrawFieldType(): string { return this.drawFieldType }
   @HostBinding("attr.data-fields") get dataFields(): string { return JSON.stringify(this.fields) }
+  @HostBinding("attr.data-required-fields") get dataRequiredFields(): string { return JSON.stringify(this.requiredFields) }
   @HostBinding("attr.data-i18n") get dataI18n(): string { return JSON.stringify(this.i18n) }
   @HostBinding("attr.data-custom-button-title") get dataCustomButtonTitle(): string { return this.customButton.title }
   @HostBinding("attr.data-custom-button-url") get dataCustomButtonUrl(): string { return this.customButton.url }
@@ -101,6 +107,13 @@ export class DocusealBuilderComponent implements AfterViewInit {
   onSaveEvent(event: CustomEvent): void {
     if (this.onSave) {
       this.onSave.emit(event.detail)
+    }
+  }
+
+  @HostListener('change', ['$event'])
+  onChangeEvent(event: CustomEvent): void {
+    if (this.onChange) {
+      this.onChange.emit(event.detail)
     }
   }
 
