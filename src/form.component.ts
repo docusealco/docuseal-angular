@@ -43,6 +43,8 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() withSendCopyButton: boolean = true
   @Input() allowToResubmit: boolean = true
   @Input() allowTypedSignature: boolean = true
+  @Input() signature: string = ""
+  @Input() rememberSignature: boolean = false
   @Input() sendCopyEmail: boolean | null = null
   @Input() values: object = {}
   @Input() metadata: object = {}
@@ -73,6 +75,8 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostBinding("attr.data-with-download-button") get dataWithDownloadButton(): boolean { return this.withDownloadButton }
   @HostBinding("attr.data-allow-to-resubmit") get dataAllowToResubmit(): boolean { return this.allowToResubmit }
   @HostBinding("attr.data-allow-typed-signature") get dataAllowTypedSignature(): boolean { return this.allowTypedSignature }
+  @HostBinding("attr.data-signature") get dataSignature(): string { return this.signature }
+  @HostBinding("attr.data-remember-signature") get dataRememberSignature(): boolean { return this.rememberSignature }
   @HostBinding("attr.data-completed-redirect-url") get dataCompletedRedirectUrl(): string { return this.completedRedirectUrl }
   @HostBinding("attr.data-with-send-copy-button") get dataWithSendCopyButton(): boolean { return this.withSendCopyButton }
   @HostBinding("attr.data-values") get dataValues(): string { return JSON.stringify(this.values) }
