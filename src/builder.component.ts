@@ -35,6 +35,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() onlyDefinedFields: boolean = false
   @Input() withSignYourselfButton: boolean = true
   @Input() withUploadButton: boolean = true
+  @Input() withAddPageButton: boolean = false
   @Input() roles: string[] = []
   @Input() fields: DocusealField[] = []
   @Input() requiredFields: DocusealField[] = []
@@ -74,6 +75,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-with-title") get dataWithTitle(): boolean { return this.withTitle }
   @HostBinding("attr.data-only-defined-fields") get dataOnlyDefinedFields(): boolean { return this.onlyDefinedFields }
   @HostBinding("attr.data-with-upload-button") get dataWithUploadButton(): boolean { return this.withUploadButton }
+  @HostBinding("attr.data-with-add-page-button") get dataWithAddPageButton(): boolean { return this.withAddPageButton }
   @HostBinding("attr.data-with-sign-yourself-button") get dataWithSignYourselfButton(): boolean { return this.withSignYourselfButton }
   @HostBinding("attr.data-background-color") get dataBackgroundColor(): string { return this.backgroundColor }
   @HostBinding("attr.data-custom-css") get dataCustomCss(): string { return this.customCss }
