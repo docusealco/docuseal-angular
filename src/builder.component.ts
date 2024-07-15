@@ -30,6 +30,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() withRecipientsButton: boolean = true
   @Input() withDocumentsList: boolean = true
   @Input() withFieldsList: boolean = true
+  @Input() withFieldPlaceholder: boolean = false
   @Input() withSendButton: boolean = true
   @Input() withTitle: boolean = true
   @Input() onlyDefinedFields: boolean = false
@@ -72,6 +73,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-with-send-button") get dataWithSendButton(): boolean { return this.withSendButton }
   @HostBinding("attr.data-with-documents-list") get dataWithDocumentsList(): boolean { return this.withDocumentsList }
   @HostBinding("attr.data-with-fields-list") get dataWithFieldsList(): boolean { return this.withFieldsList }
+  @HostBinding("attr.data-with-field-placeholder") get dataWithFieldPlaceholder(): boolean { return this.withFieldPlaceholder }
   @HostBinding("attr.data-with-title") get dataWithTitle(): boolean { return this.withTitle }
   @HostBinding("attr.data-only-defined-fields") get dataOnlyDefinedFields(): boolean { return this.onlyDefinedFields }
   @HostBinding("attr.data-with-upload-button") get dataWithUploadButton(): boolean { return this.withUploadButton }
