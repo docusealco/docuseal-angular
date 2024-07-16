@@ -26,6 +26,8 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() host: string = "cdn.docuseal.co"
   @Input() language: string = "en"
   @Input() preview: boolean = false
+  @Input() previewMode: boolean = false
+  @Input() inputMode: boolean = false
   @Input() autosave: boolean = true
   @Input() withRecipientsButton: boolean = true
   @Input() withDocumentsList: boolean = true
@@ -56,7 +58,8 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Output() onChange = new EventEmitter<any>()
 
   @HostBinding("attr.data-token") get dataToken(): string { return this.token }
-  @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview }
+  @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview || this.previewMode }
+  @HostBinding("attr.data-input-mode") get dataInputMode(): boolean { return this.inputMode }
   @HostBinding("attr.data-language") get dataLanguage(): string { return this.language }
   @HostBinding("attr.data-autosave") get dataAutosave(): boolean { return this.autosave }
   @HostBinding("attr.data-send-button-text") get dataSendButtonText(): string { return this.sendButtonText }
