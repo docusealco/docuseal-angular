@@ -39,6 +39,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() autoscrollFields: boolean = true
   @Input() withTitle: boolean = true
   @Input() withFieldNames: boolean = true
+  @Input() withFieldPlaceholder: boolean = false
   @Input() withDownloadButton: boolean = true
   @Input() withSendCopyButton: boolean = true
   @Input() allowToResubmit: boolean = true
@@ -72,6 +73,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostBinding("attr.data-logo") get dataLogo(): string { return this.logo }
   @HostBinding("attr.data-language") get dataLanguage(): string { return this.language }
   @HostBinding("attr.data-with-field-names") get dataWithFieldNames(): boolean { return this.withFieldNames }
+  @HostBinding("attr.data-with-field-placeholder") get dataWithFieldPlaceholder(): boolean { return this.withFieldPlaceholder }
   @HostBinding("attr.data-with-download-button") get dataWithDownloadButton(): boolean { return this.withDownloadButton }
   @HostBinding("attr.data-allow-to-resubmit") get dataAllowToResubmit(): boolean { return this.allowToResubmit }
   @HostBinding("attr.data-allow-typed-signature") get dataAllowTypedSignature(): boolean { return this.allowTypedSignature }
