@@ -1,13 +1,13 @@
 {
   "name": "@docuseal/angular",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "DocuSeal Angular components to integrate documents signing process into apps. ✍️",
   "esm2022": "dist/esm2022/docuseal-angular.mjs",
   "esm": "dist/esm2022/docuseal-angular.mjs",
   "default": "dist/fesm2022/docuseal-angular.mjs",
   "module": "dist/fesm2022/docuseal-angular.mjs",
   "types": "dist/index.d.ts",
-  "author": "Oleksandr Turchyn <alex@docuseal.co>",
+  "author": "Alex Turchyn <alex@docuseal.co>",
   "license": "MIT",
   "homepage": "https://www.docuseal.co/docs/embedded",
   "bugs": {

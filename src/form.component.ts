@@ -38,6 +38,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() skipFields: boolean = false
   @Input() autoscrollFields: boolean = true
   @Input() withTitle: boolean = true
+  @Input() withDecline: boolean = false
   @Input() withFieldNames: boolean = true
   @Input() withFieldPlaceholder: boolean = false
   @Input() withDownloadButton: boolean = true
@@ -56,6 +57,7 @@ export class DocusealFormComponent implements AfterViewInit {
 
   @Output() onComplete = new EventEmitter<any>()
   @Output() onInit = new EventEmitter<any>()
+  @Output() onDecline = new EventEmitter<any>()
   @Output() onLoad = new EventEmitter<any>()
 
 
@@ -70,6 +72,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostBinding("attr.data-autoscroll-fields") get dataAutoscrollFields(): boolean { return this.autoscrollFields }
   @HostBinding("attr.data-send-copy-email") get dataSendCopyEmail(): boolean | null { return this.sendCopyEmail }
   @HostBinding("attr.data-with-title") get dataWithTitle(): boolean { return this.withTitle }
+  @HostBinding("attr.data-with-decline") get dataWithDecline(): boolean { return this.withDecline }
   @HostBinding("attr.data-logo") get dataLogo(): string { return this.logo }
   @HostBinding("attr.data-language") get dataLanguage(): string { return this.language }
   @HostBinding("attr.data-with-field-names") get dataWithFieldNames(): boolean { return this.withFieldNames }
@@ -106,6 +109,13 @@ export class DocusealFormComponent implements AfterViewInit {
   onInitEvent(event: CustomEvent): void {
     if (this.onInit) {
       this.onInit.emit(event.detail)
+    }
+  }
+
+  @HostListener('declined', ['$event'])
+  onDeclineEvent(event: CustomEvent): void {
+    if (this.onDecline) {
+      this.onDecline.emit(event.detail)
     }
   }
 
