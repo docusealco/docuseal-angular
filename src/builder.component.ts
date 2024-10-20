@@ -23,7 +23,7 @@ interface AfterViewInit {
 
 export class DocusealBuilderComponent implements AfterViewInit {
   @Input() token: string = ""
-  @Input() host: string = "cdn.docuseal.co"
+  @Input() host: string = "cdn.docuseal.com"
   @Input() language: string = "en"
   @Input() preview: boolean = false
   @Input() previewMode: boolean = false

@@ -21,7 +21,7 @@ interface AfterViewInit {
 
 export class DocusealFormComponent implements AfterViewInit {
   @Input() src: string = ""
-  @Input() host: string = "cdn.docuseal.co"
+  @Input() host: string = "cdn.docuseal.com"
   @Input() role: string = ""
   @Input() submitter: string = "" // Backward compatibility
   @Input() expand: boolean = true
