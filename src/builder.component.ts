@@ -10,6 +10,11 @@ interface DocusealField {
   default_value?: string,
 }
 
+interface DocusealSubmitter {
+  email?: string,
+  role?: string,
+}
+
 interface AfterViewInit {
   ngAfterViewInit(): void
 }
@@ -41,6 +46,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() withAddPageButton: boolean = false
   @Input() roles: string[] = []
   @Input() fields: DocusealField[] = []
+  @Input() submitters: DocusealSubmitter[] = []
   @Input() requiredFields: DocusealField[] = []
   @Input() i18n: object = {}
   @Input() fieldTypes: string[] = []
@@ -68,6 +74,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-field-types") get dataFieldTypes(): string { return this.fieldTypes.join(',') }
   @HostBinding("attr.data-draw-field-type") get dataDrawFieldType(): string { return this.drawFieldType }
   @HostBinding("attr.data-fields") get dataFields(): string { return JSON.stringify(this.fields) }
+  @HostBinding("attr.data-submitters") get dataSubmitters(): string { return JSON.stringify(this.submitters) }
   @HostBinding("attr.data-required-fields") get dataRequiredFields(): string { return JSON.stringify(this.requiredFields) }
   @HostBinding("attr.data-i18n") get dataI18n(): string { return JSON.stringify(this.i18n) }
   @HostBinding("attr.data-custom-button-title") get dataCustomButtonTitle(): string { return this.customButton.title }
