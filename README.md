@@ -1,6 +1,6 @@
 # DocuSeal Angular Components
 
-This package provides a convenient way to embed [DocuSeal](https://www.docuseal.co) into Angular apps. Sign documents and create document forms directly in your apps.
+This package provides a convenient way to embed [DocuSeal](https://www.docuseal.com) into Angular apps. Sign documents and create document forms directly in your apps.
 
 ![Docuseal Form](https://github.com/docusealco/docuseal-vue/assets/1176367/828f9f53-3131-494c-8e37-5c74fa94cfa8)
 
@@ -12,13 +12,13 @@ npm install @docuseal/angular
 
 ## Documentation
 
-For detailed documentation, please click [here](https://www.docuseal.co/docs/embedded).
+For detailed documentation, please click [here](https://www.docuseal.com/docs/embedded).
 
 ## Usage
 
 ### Signing Form
 
-Copy public DocuSeal form URL from [https://docuseal.co](https://docuseal.co) and use it in the `src` component prop:
+Copy public DocuSeal form URL from [https://docuseal.com](https://docuseal.com) and use it in the `src` component prop:
 
 ```typescript
 import { Component } from '@angular/core';
@@ -31,7 +31,7 @@ import { DocusealFormComponent } from '@docuseal/angular';
   template: `
     <div class="app">
       <docuseal-form
-        src="https://docuseal.co/d/LEVGR9rhZYf86M"
+        src="https://docuseal.com/d/LEVGR9rhZYf86M"
         email="signer@example.com">
       </docuseal-form>
     </div>
