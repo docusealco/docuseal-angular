@@ -8,11 +8,18 @@ interface DocusealField {
   description?: string,
   required?: boolean,
   default_value?: string,
+  width?: number,
+  height?: number,
+  format?: string,
+  options?: string[],
+  validation?: { pattern?: string, message?: string }
 }
 
 interface DocusealSubmitter {
   email?: string,
   role?: string,
+  name?: string,
+  phone?: string,
 }
 
 interface AfterViewInit {
