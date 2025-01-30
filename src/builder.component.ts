@@ -59,6 +59,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() fieldTypes: string[] = []
   @Input() drawFieldType: string = "text"
   @Input() customButton: { title: string, url: string } = { title: "", url: "" }
+  @Input() emailMessage: { subject: string, body: string } = { subject: "", body: "" }
   @Input() backgroundColor: string = ""
   @Input() sendButtonText: string = ""
   @Input() saveButtonText: string = ""
@@ -86,6 +87,8 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-i18n") get dataI18n(): string { return JSON.stringify(this.i18n) }
   @HostBinding("attr.data-custom-button-title") get dataCustomButtonTitle(): string { return this.customButton.title }
   @HostBinding("attr.data-custom-button-url") get dataCustomButtonUrl(): string { return this.customButton.url }
+  @HostBinding("attr.data-email-subject") get dataEmailMessageSubject(): string { return this.emailMessage.subject }
+  @HostBinding("attr.data-email-body") get dataEmailMessageBody(): string { return this.emailMessage.body }
   @HostBinding("attr.data-with-recipients-button") get dataWithRecipientsButton(): boolean { return this.withRecipientsButton }
   @HostBinding("attr.data-with-send-button") get dataWithSendButton(): boolean { return this.withSendButton }
   @HostBinding("attr.data-with-documents-list") get dataWithDocumentsList(): boolean { return this.withDocumentsList }
