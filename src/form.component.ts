@@ -27,6 +27,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() expand: boolean = true
   @Input() preview: boolean = false
   @Input() email: string = ""
+  @Input() name: string = ""
   @Input() applicationKey: string = ""
   @Input() externalId: string = ""
   @Input() backgroundColor: string = ""
@@ -47,6 +48,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() allowTypedSignature: boolean = true
   @Input() signature: string = ""
   @Input() rememberSignature: boolean = false
+  @Input() reuseSignature: boolean = true
   @Input() sendCopyEmail: boolean | null = null
   @Input() values: object = {}
   @Input() metadata: object = {}
@@ -63,6 +65,7 @@ export class DocusealFormComponent implements AfterViewInit {
 
   @HostBinding("attr.data-src") get dataSrc(): string { return this.src }
   @HostBinding("attr.data-email") get dataEmail(): string { return this.email }
+  @HostBinding("attr.data-name") get dataName(): string { return this.name }
   @HostBinding("attr.data-role") get dataRole(): string { return this.role || this.submitter }
   @HostBinding("attr.data-external-id") get dataExternalId(): string { return this.externalId || this.applicationKey }
   @HostBinding("attr.data-expand") get dataExpand(): boolean { return this.expand }
@@ -82,6 +85,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostBinding("attr.data-allow-typed-signature") get dataAllowTypedSignature(): boolean { return this.allowTypedSignature }
   @HostBinding("attr.data-signature") get dataSignature(): string { return this.signature }
   @HostBinding("attr.data-remember-signature") get dataRememberSignature(): boolean { return this.rememberSignature }
+  @HostBinding("attr.data-reuse-signature") get dataReuseSignature(): boolean { return this.reuseSignature }
   @HostBinding("attr.data-completed-redirect-url") get dataCompletedRedirectUrl(): string { return this.completedRedirectUrl }
   @HostBinding("attr.data-with-send-copy-button") get dataWithSendCopyButton(): boolean { return this.withSendCopyButton }
   @HostBinding("attr.data-values") get dataValues(): string { return JSON.stringify(this.values) }
