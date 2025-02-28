@@ -1,6 +1,6 @@
 import { Component, Input, HostListener, HostBinding, Output, EventEmitter } from "@angular/core"
 
-interface DocusealField {
+export type DocusealFormField = {
   name: string,
   title?: string,
   type?: string,
@@ -53,7 +53,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() values: object = {}
   @Input() metadata: object = {}
   @Input() i18n: object = {}
-  @Input() fields: DocusealField[] = []
+  @Input() fields: DocusealFormField[] = []
   @Input() readonlyFields: string[] = []
   @Input() customCss: string = ""
 

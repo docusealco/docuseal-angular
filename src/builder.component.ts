@@ -1,6 +1,6 @@
 import { Component, Input, HostListener, HostBinding, Output, EventEmitter } from "@angular/core"
 
-interface DocusealField {
+export type DocusealBuilderField = {
   name: string,
   type?: string,
   role?: string,
@@ -15,7 +15,7 @@ interface DocusealField {
   validation?: { pattern?: string, message?: string }
 }
 
-interface DocusealSubmitter {
+export type DocusealBuilderSubmitter = {
   email?: string,
   role?: string,
   name?: string,
@@ -52,9 +52,9 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() withUploadButton: boolean = true
   @Input() withAddPageButton: boolean = false
   @Input() roles: string[] = []
-  @Input() fields: DocusealField[] = []
-  @Input() submitters: DocusealSubmitter[] = []
-  @Input() requiredFields: DocusealField[] = []
+  @Input() fields: DocusealBuilderField[] = []
+  @Input() submitters: DocusealBuilderSubmitter[] = []
+  @Input() requiredFields: DocusealBuilderField[] = []
   @Input() i18n: object = {}
   @Input() fieldTypes: string[] = []
   @Input() drawFieldType: string = "text"
