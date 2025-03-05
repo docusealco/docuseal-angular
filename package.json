@@ -1,6 +1,6 @@
 {
   "name": "@docuseal/angular",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "DocuSeal Angular components to integrate documents signing process into apps. ✍️",
   "esm2022": "dist/esm2022/docuseal-angular.mjs",
   "esm": "dist/esm2022/docuseal-angular.mjs",
@@ -14,6 +14,10 @@
     "url": "https://github.com/docusealco/docuseal-angular/issues"
   },
   "repository": "https://github.com/docusealco/docuseal-angular",
+  "peerDependencies": {
+    "@angular/core": ">=16.0.0",
+    "@angular/common": ">=16.0.0"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.7",
     "@angular-eslint/builder": "19.0.2",
