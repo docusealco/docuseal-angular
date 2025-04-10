@@ -42,6 +42,8 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() role: string = ""
   @Input() submitter: string = "" // Backward compatibility
   @Input() expand: boolean = true
+  @Input() minimize: boolean = false
+  @Input() orderAsOnPage: boolean = false
   @Input() preview: boolean = false
   @Input() email: string = ""
   @Input() name: string = ""
@@ -51,6 +53,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() logo: string = ""
   @Input() language: string = ""
   @Input() completedRedirectUrl: string = ""
+  @Input() completedMessage: { title: string, body: string } = { title: "", body: "" }
   @Input() completedButton: { title: string, url: string } = { title: "", url: "" }
   @Input() goToLast: boolean = true
   @Input() skipFields: boolean = false
@@ -87,6 +90,8 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostBinding("attr.data-role") get dataRole(): string { return this.role || this.submitter }
   @HostBinding("attr.data-external-id") get dataExternalId(): string { return this.externalId || this.applicationKey }
   @HostBinding("attr.data-expand") get dataExpand(): boolean { return this.expand }
+  @HostBinding("attr.data-minimize") get dataMinimize(): boolean { return this.minimize }
+  @HostBinding("attr.data-order-as-on-page") get dataOrderAsOnPage(): boolean { return this.orderAsOnPage }
   @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview }
   @HostBinding("attr.data-go-to-last") get dataGoToLast(): boolean { return this.goToLast }
   @HostBinding("attr.data-skip-fields") get dataSkipFields(): boolean { return this.skipFields }
@@ -112,6 +117,8 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostBinding("attr.data-fields") get dataFields(): string { return JSON.stringify(this.fields) }
   @HostBinding("attr.data-i18n") get dataI18n(): string { return JSON.stringify(this.i18n) }
   @HostBinding("attr.data-readonly-fields") get dataReadonlyFields(): string { return this.readonlyFields.join(',') }
+  @HostBinding("attr.data-completed-message-title") get dataCompletedMessageTitle(): string { return this.completedMessage.title }
+  @HostBinding("attr.data-completed-message-body") get dataCompletedMessageBody(): string { return this.completedMessage.body }
   @HostBinding("attr.data-completed-button-title") get dataCompletedButtonTitle(): string { return this.completedButton.title }
   @HostBinding("attr.data-completed-button-url") get dataCompletedButtonUrl(): string { return this.completedButton.url }
   @HostBinding("attr.data-background-color") get dataBackgroundColor(): string { return this.backgroundColor }
