@@ -1,6 +1,6 @@
 {
   "name": "@docuseal/angular",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "DocuSeal Angular components to integrate documents signing process into apps. ✍️",
   "esm2022": "dist/esm2022/docuseal-angular.mjs",
   "esm": "dist/esm2022/docuseal-angular.mjs",
