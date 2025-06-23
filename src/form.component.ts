@@ -39,6 +39,7 @@ interface AfterViewInit {
 
 export class DocusealFormComponent implements AfterViewInit {
   @Input() src: string = ""
+  @Input() token: string = ""
   @Input() host: string = "cdn.docuseal.com"
   @Input() role: string = ""
   @Input() submitter: string = "" // Backward compatibility
@@ -86,6 +87,7 @@ export class DocusealFormComponent implements AfterViewInit {
 
 
   @HostBinding("attr.data-src") get dataSrc(): string { return this.src }
+  @HostBinding("attr.data-token") get dataToken(): string { return this.token }
   @HostBinding("attr.data-email") get dataEmail(): string { return this.email }
   @HostBinding("attr.data-name") get dataName(): string { return this.name }
   @HostBinding("attr.data-role") get dataRole(): string { return this.role || this.submitter }
