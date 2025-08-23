@@ -47,6 +47,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() minimize: boolean = false
   @Input() orderAsOnPage: boolean = false
   @Input() preview: boolean = false
+  @Input() dryRun: boolean = false
   @Input() email: string = ""
   @Input() name: string = ""
   @Input() applicationKey: string = ""
@@ -96,6 +97,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostBinding("attr.data-minimize") get dataMinimize(): boolean { return this.minimize }
   @HostBinding("attr.data-order-as-on-page") get dataOrderAsOnPage(): boolean { return this.orderAsOnPage }
   @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview }
+  @HostBinding("attr.data-dry-run") get dataDryRun(): boolean { return this.dryRun }
   @HostBinding("attr.data-go-to-last") get dataGoToLast(): boolean { return this.goToLast }
   @HostBinding("attr.data-skip-fields") get dataSkipFields(): boolean { return this.skipFields }
   @HostBinding("attr.data-autoscroll-fields") get dataAutoscrollFields(): boolean { return this.autoscrollFields }
