@@ -68,6 +68,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() withDownloadButton: boolean = true
   @Input() withSendCopyButton: boolean = true
   @Input() withCompleteButton: boolean = false
+  @Input() onlyRequiredFields: boolean = false
   @Input() allowToResubmit: boolean = true
   @Input() allowTypedSignature: boolean = true
   @Input() signature: string = ""
@@ -109,6 +110,7 @@ export class DocusealFormComponent implements AfterViewInit {
   @HostBinding("attr.data-with-field-names") get dataWithFieldNames(): boolean { return this.withFieldNames }
   @HostBinding("attr.data-with-field-placeholder") get dataWithFieldPlaceholder(): boolean { return this.withFieldPlaceholder }
   @HostBinding("attr.data-with-download-button") get dataWithDownloadButton(): boolean { return this.withDownloadButton }
+  @HostBinding("attr.data-only-required-fields") get dataOnlyRequiredFields(): boolean { return this.onlyRequiredFields }
   @HostBinding("attr.data-allow-to-resubmit") get dataAllowToResubmit(): boolean { return this.allowToResubmit }
   @HostBinding("attr.data-allow-typed-signature") get dataAllowTypedSignature(): boolean { return this.allowTypedSignature }
   @HostBinding("attr.data-signature") get dataSignature(): string { return this.signature }
