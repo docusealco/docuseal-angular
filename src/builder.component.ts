@@ -67,6 +67,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() withFieldPlaceholder: boolean = false
   @Input() withSendButton: boolean = true
   @Input() withTitle: boolean = true
+  @Input() withPrefillable: boolean = false
   @Input() onlyDefinedFields: boolean = false
   @Input() withSignYourselfButton: boolean = true
   @Input() withUploadButton: boolean = true
@@ -116,6 +117,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-with-fields-detection") get dataWithFieldsDetection(): boolean { return this.withFieldsDetection }
   @HostBinding("attr.data-with-signature-id") get dataWithSignatureId(): boolean | null { return this.withSignatureId }
   @HostBinding("attr.data-with-field-placeholder") get dataWithFieldPlaceholder(): boolean { return this.withFieldPlaceholder }
+  @HostBinding("attr.data-with-prefillable") get dataWithPrefillable(): boolean { return this.dataWithPrefillable }
   @HostBinding("attr.data-with-title") get dataWithTitle(): boolean { return this.withTitle }
   @HostBinding("attr.data-only-defined-fields") get dataOnlyDefinedFields(): boolean { return this.onlyDefinedFields }
   @HostBinding("attr.data-with-upload-button") get dataWithUploadButton(): boolean { return this.withUploadButton }
