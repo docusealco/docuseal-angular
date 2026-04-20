@@ -61,6 +61,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() autosave: boolean = true
   @Input() withRecipientsButton: boolean = true
   @Input() withDocumentsList: boolean = true
+  @Input() withDynamicDocuments: boolean = false
   @Input() withSignatureId: boolean | null = null
   @Input() withFieldsList: boolean = true
   @Input() withFieldsDetection: boolean = false
@@ -113,6 +114,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-with-recipients-button") get dataWithRecipientsButton(): boolean { return this.withRecipientsButton }
   @HostBinding("attr.data-with-send-button") get dataWithSendButton(): boolean { return this.withSendButton }
   @HostBinding("attr.data-with-documents-list") get dataWithDocumentsList(): boolean { return this.withDocumentsList }
+  @HostBinding("attr.data-with-dynamic-documents") get dataWithDynamicDocuments(): boolean { return this.withDynamicDocuments }
   @HostBinding("attr.data-with-fields-list") get dataWithFieldsList(): boolean { return this.withFieldsList }
   @HostBinding("attr.data-with-fields-detection") get dataWithFieldsDetection(): boolean { return this.withFieldsDetection }
   @HostBinding("attr.data-with-signature-id") get dataWithSignatureId(): boolean | null { return this.withSignatureId }
