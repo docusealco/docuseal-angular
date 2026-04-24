@@ -69,6 +69,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() withSendButton: boolean = true
   @Input() withTitle: boolean = true
   @Input() withPrefillable: boolean = false
+  @Input() withCustomFieldsTab: boolean = false
   @Input() onlyDefinedFields: boolean = false
   @Input() withSignYourselfButton: boolean = true
   @Input() withUploadButton: boolean = true
@@ -79,6 +80,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() requiredFields: DocusealBuilderField[] = []
   @Input() i18n: object = {}
   @Input() fieldTypes: string[] = []
+  @Input() dateFormats: string[] = []
   @Input() drawFieldType: string = "text"
   @Input() customButton: { title: string, url: string } = { title: "", url: "" }
   @Input() emailMessage: { subject: string, body: string } = { subject: "", body: "" }
@@ -106,6 +108,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-fields") get dataFields(): string { return JSON.stringify(this.fields) }
   @HostBinding("attr.data-submitters") get dataSubmitters(): string { return JSON.stringify(this.submitters) }
   @HostBinding("attr.data-required-fields") get dataRequiredFields(): string { return JSON.stringify(this.requiredFields) }
+  @HostBinding("attr.data-date-formats") get dataDateFormats(): string { return this.dateFormats.join(',') }
   @HostBinding("attr.data-i18n") get dataI18n(): string { return JSON.stringify(this.i18n) }
   @HostBinding("attr.data-custom-button-title") get dataCustomButtonTitle(): string { return this.customButton.title }
   @HostBinding("attr.data-custom-button-url") get dataCustomButtonUrl(): string { return this.customButton.url }
@@ -120,6 +123,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-with-signature-id") get dataWithSignatureId(): boolean | null { return this.withSignatureId }
   @HostBinding("attr.data-with-field-placeholder") get dataWithFieldPlaceholder(): boolean { return this.withFieldPlaceholder }
   @HostBinding("attr.data-with-prefillable") get dataWithPrefillable(): boolean { return this.withPrefillable }
+  @HostBinding("attr.data-with-custom-fields-tab") get dataWithCustomFieldsTab(): boolean { return this.withCustomFieldsTab }
   @HostBinding("attr.data-with-title") get dataWithTitle(): boolean { return this.withTitle }
   @HostBinding("attr.data-only-defined-fields") get dataOnlyDefinedFields(): boolean { return this.onlyDefinedFields }
   @HostBinding("attr.data-with-upload-button") get dataWithUploadButton(): boolean { return this.withUploadButton }
