@@ -69,6 +69,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() withSendButton: boolean = true
   @Input() withTitle: boolean = true
   @Input() withPrefillable: boolean = false
+  @Input() withRevisions: boolean = false
   @Input() withCustomFieldsTab: boolean = false
   @Input() onlyDefinedFields: boolean = false
   @Input() withSignYourselfButton: boolean = true
@@ -123,6 +124,7 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @HostBinding("attr.data-with-signature-id") get dataWithSignatureId(): boolean | null { return this.withSignatureId }
   @HostBinding("attr.data-with-field-placeholder") get dataWithFieldPlaceholder(): boolean { return this.withFieldPlaceholder }
   @HostBinding("attr.data-with-prefillable") get dataWithPrefillable(): boolean { return this.withPrefillable }
+  @HostBinding("attr.data-with-revisions") get dataWithRevisions(): boolean { return this.withRevisions }
   @HostBinding("attr.data-with-custom-fields-tab") get dataWithCustomFieldsTab(): boolean { return this.withCustomFieldsTab }
   @HostBinding("attr.data-with-title") get dataWithTitle(): boolean { return this.withTitle }
   @HostBinding("attr.data-only-defined-fields") get dataOnlyDefinedFields(): boolean { return this.onlyDefinedFields }
