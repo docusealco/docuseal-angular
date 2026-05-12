@@ -40,6 +40,121 @@ export type DocusealBuilderSubmitter = {
   phone?: string,
 }
 
+export type DocusealBuilderSendData = {
+  id: number,
+  created_at: string,
+  archived_at: string | null,
+  template_submitters: Array<{
+    name: string,
+    uuid: string,
+    is_requester?: boolean,
+    linked_to_uuid?: string | null,
+    order?: number,
+    invite_via_field_uuid?: string | null,
+    optional_invite_by_uuid?: string | null,
+    invite_by_uuid?: string | null,
+    email?: string,
+  }>,
+  template: {
+    id: number,
+    name: string,
+    external_id: string | null,
+    created_at: string,
+  },
+  submitters: Array<{
+    id: number,
+    uuid: string,
+    email: string,
+    completed_at: string | null,
+    opened_at: string | null,
+    sent_at: string | null,
+    status_event_at: string,
+    status: string,
+  }>,
+}
+
+type DocusealBuilderTemplateData = {
+  id: number,
+  author_id: number,
+  folder_id: number | null,
+  external_id: string | null,
+  name: string,
+  slug: string,
+  source: string | null,
+  archived_at: string | null,
+  created_at: string,
+  updated_at: string,
+  shared_link: boolean,
+  preferences: Record<string, unknown> | null,
+  variables_schema: Record<string, unknown> | null,
+  schema: Array<{
+    attachment_uuid: string,
+    name: string,
+    google_drive_file_id?: string,
+    dynamic?: boolean,
+    conditions?: Array<{
+      field_uuid: string,
+      value: string,
+      action: string,
+      operation: string,
+    }>,
+  }>,
+  fields: Array<{
+    uuid: string,
+    submitter_uuid: string,
+    name: string,
+    type: string,
+    required: boolean,
+    readonly?: boolean,
+    default_value?: string | string[] | null,
+    title?: string,
+    description?: string,
+    prefillable?: boolean,
+    preferences?: Record<string, unknown>,
+    options?: Array<{ value: string, uuid: string }>,
+    validation?: {
+      message?: string,
+      pattern?: string,
+      min?: number,
+      max?: number,
+      step?: number,
+    },
+    conditions?: Array<{
+      field_uuid: string,
+      value: string,
+      action: string,
+      operation: string,
+    }>,
+    areas?: Array<{
+      uuid: string,
+      x: number,
+      y: number,
+      w: number,
+      h: number,
+      cell_w?: number,
+      attachment_uuid: string,
+      option_uuid?: string,
+      page: number,
+    }>,
+  }>,
+  submitters: Array<{
+    name: string,
+    uuid: string,
+    is_requester?: boolean,
+    linked_to_uuid?: string | null,
+    order?: number,
+    invite_via_field_uuid?: string | null,
+    optional_invite_by_uuid?: string | null,
+    invite_by_uuid?: string | null,
+    email?: string,
+  }>,
+}
+
+export type DocusealBuilderLoadData = DocusealBuilderTemplateData
+export type DocusealBuilderUploadData = DocusealBuilderTemplateData
+export type DocusealBuilderSaveData = DocusealBuilderTemplateData
+export type DocusealBuilderChangeData = DocusealBuilderTemplateData
+
 interface AfterViewInit {
   ngAfterViewInit(): void
 }
@@ -90,11 +205,11 @@ export class DocusealBuilderComponent implements AfterViewInit {
   @Input() saveButtonText: string = ""
   @Input() customCss: string = ""
 
-  @Output() onLoad = new EventEmitter<any>()
-  @Output() onUpload = new EventEmitter<any>()
-  @Output() onSend = new EventEmitter<any>()
-  @Output() onSave = new EventEmitter<any>()
-  @Output() onChange = new EventEmitter<any>()
+  @Output() onLoad = new EventEmitter<DocusealBuilderLoadData>()
+  @Output() onUpload = new EventEmitter<DocusealBuilderUploadData>()
+  @Output() onSend = new EventEmitter<DocusealBuilderSendData>()
+  @Output() onSave = new EventEmitter<DocusealBuilderSaveData>()
+  @Output() onChange = new EventEmitter<DocusealBuilderChangeData>()
 
   @HostBinding("attr.data-token") get dataToken(): string { return this.token }
   @HostBinding("attr.data-preview") get dataPreview(): boolean { return this.preview || this.previewMode }
@@ -139,37 +254,37 @@ export class DocusealBuilderComponent implements AfterViewInit {
   }
 
   @HostListener('send', ['$event'])
-  onSendEvent(event: CustomEvent): void {
+  onSendEvent(event: Event): void {
     if (this.onSend) {
-      this.onSend.emit(event.detail)
+      this.onSend.emit((event as CustomEvent).detail)
     }
   }
 
   @HostListener('load', ['$event'])
-  onLoadEvent(event: CustomEvent): void {
+  onLoadEvent(event: Event): void {
     if (this.onLoad) {
-      this.onLoad.emit(event.detail)
+      this.onLoad.emit((event as CustomEvent).detail)
     }
   }
 
   @HostListener('upload', ['$event'])
-  onUploadEvent(event: CustomEvent): void {
+  onUploadEvent(event: Event): void {
     if (this.onUpload) {
-      this.onUpload.emit(event.detail)
+      this.onUpload.emit((event as CustomEvent).detail)
     }
   }
 
   @HostListener('save', ['$event'])
-  onSaveEvent(event: CustomEvent): void {
+  onSaveEvent(event: Event): void {
     if (this.onSave) {
-      this.onSave.emit(event.detail)
+      this.onSave.emit((event as CustomEvent).detail)
     }
   }
 
   @HostListener('change', ['$event'])
-  onChangeEvent(event: CustomEvent): void {
+  onChangeEvent(event: Event): void {
     if (this.onChange) {
-      this.onChange.emit(event.detail)
+      this.onChange.emit((event as CustomEvent).detail)
     }
   }
 

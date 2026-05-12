@@ -26,6 +26,95 @@ export type DocusealFormField = {
   }
 }
 
+export type DocusealFormLoadData = {
+  sandbox: boolean,
+  template: {
+    id: number,
+    name: string,
+    shared_link: boolean,
+  },
+  submission: {
+    id: number,
+    name: string | null,
+  } | null,
+  submitter: {
+    id: number,
+    email: string,
+    slug: string,
+    name: string | null,
+    phone: string | null,
+    values: Record<string, unknown>,
+    uuid: string,
+    external_id: string | null,
+    preferences: Record<string, unknown>,
+  } | null,
+  values: Record<string, unknown>,
+  logo: {
+    url: string,
+    metadata: Record<string, unknown>,
+  } | null,
+  completed_submitter: {
+    id: number,
+    submission_id: number,
+    email: string,
+    name: string | null,
+    completed_at: string,
+  } | null,
+  expired_submitter: {
+    id: number,
+    submission_id: number,
+    declined_at: string | null,
+    expire_at: string,
+  } | null,
+}
+
+type DocusealFormSubmitterData = {
+  id: number,
+  submission_id: number,
+  email: string,
+  phone: string | null,
+  name: string | null,
+  ua: string,
+  ip: string,
+  sent_at: string | null,
+  opened_at: string | null,
+  completed_at: string | null,
+  declined_at: string | null,
+  created_at: string,
+  updated_at: string,
+  external_id: string | null,
+  metadata: Record<string, unknown>,
+  status: 'completed' | 'declined' | 'expired' | 'pending',
+  decline_reason: string | null,
+  role: string,
+  preferences: Record<string, unknown>,
+  values: Array<{
+    field: string,
+    value: unknown,
+  }>,
+  submission_url: string,
+  template: {
+    id: number,
+    name: string,
+    external_id: string | null,
+    created_at: string,
+    updated_at: string,
+    folder_name: string | null,
+  },
+  submission: {
+    id: number,
+    audit_log_url: string | null,
+    combined_document_url: string | null,
+    status: 'completed' | 'declined' | 'expired' | 'pending',
+    url: string,
+    variables: Record<string, unknown>,
+    created_at: string,
+  },
+}
+
+export type DocusealFormCompleteData = DocusealFormSubmitterData
+export type DocusealFormDeclineData = DocusealFormSubmitterData
+
 interface AfterViewInit {
   ngAfterViewInit(): void
 }
@@ -82,10 +171,10 @@ export class DocusealFormComponent implements AfterViewInit {
   @Input() readonlyFields: string[] = []
   @Input() customCss: string = ""
 
-  @Output() onComplete = new EventEmitter<any>()
-  @Output() onInit = new EventEmitter<any>()
-  @Output() onDecline = new EventEmitter<any>()
-  @Output() onLoad = new EventEmitter<any>()
+  @Output() onComplete = new EventEmitter<DocusealFormCompleteData>()
+  @Output() onInit = new EventEmitter<void>()
+  @Output() onDecline = new EventEmitter<DocusealFormDeclineData>()
+  @Output() onLoad = new EventEmitter<DocusealFormLoadData>()
 
 
   @HostBinding("attr.data-src") get dataSrc(): string { return this.src }
@@ -136,30 +225,30 @@ export class DocusealFormComponent implements AfterViewInit {
   }
 
   @HostListener('completed', ['$event'])
-  onCompleteEvent(event: CustomEvent): void {
+  onCompleteEvent(event: Event): void {
     if (this.onComplete) {
-      this.onComplete.emit(event.detail)
+      this.onComplete.emit((event as CustomEvent).detail)
     }
   }
 
-  @HostListener('init', ['$event'])
-  onInitEvent(event: CustomEvent): void {
+  @HostListener('init')
+  onInitEvent(): void {
     if (this.onInit) {
-      this.onInit.emit(event.detail)
+      this.onInit.emit()
     }
   }
 
   @HostListener('declined', ['$event'])
-  onDeclineEvent(event: CustomEvent): void {
+  onDeclineEvent(event: Event): void {
     if (this.onDecline) {
-      this.onDecline.emit(event.detail)
+      this.onDecline.emit((event as CustomEvent).detail)
     }
   }
 
   @HostListener('load', ['$event'])
-  onLoadEvent(event: CustomEvent): void {
+  onLoadEvent(event: Event): void {
     if (this.onLoad) {
-      this.onLoad.emit(event.detail)
+      this.onLoad.emit((event as CustomEvent).detail)
     }
   }
 
